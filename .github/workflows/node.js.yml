@@ -39,3 +39,18 @@ jobs:
         npm test
       env:
         CI: true
+
+  labelWhenApproved:
+    name: Label when approved
+    runs-on: ubuntu-latest
+    steps:
+    - name: Label when approved
+      run: |
+        npm install
+        npm test
+    - uses: actions/checkout@v2
+      env:
+        APPROVALS: "1"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ADD_LABEL: "approved"
+        REMOVE_LABEL: "awaiting%20review"
